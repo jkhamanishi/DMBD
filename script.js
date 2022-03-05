@@ -3,7 +3,8 @@ window.onload = function() {
 };
 
 function showCode(code){
-  document.getElementById("output_code").innerText = code
+  // document.getElementById("output_code").innerText = code
+  document.getElementById("output_code").innerHTML = code
 }
 
 function insertIntoIframe(html_code){
