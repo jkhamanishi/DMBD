@@ -91,7 +91,7 @@ var ExcelToJSON = function() {
             
             
             code += START_BOX;
-            code += `					<a href="${page}" target="_blank"><img src="${img}"`+
+            code += `					<a href="${page}" target="_blank"><img src="${img}" `+
             `title="Box ${box_num}: ${name} (${year})" /></a>`
             code += END_BOX;
           } else {
