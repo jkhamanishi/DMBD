@@ -17,7 +17,7 @@ const HEAD = `
 	<link rel="stylesheet" type="text/css" href="wordpressSIMULATOR.css"><!--- This is for offline testing --->	
 </head>		
 <body>		
-<p>Click a box to see details</p>&nbsp;		
+<p>Hover over a box to see details</p>&nbsp;		
 		
 <div style="height: auto; overflow: auto">		
 	<table>	
@@ -31,14 +31,14 @@ const END_ROW = `
 			</tr>
 `
 const INDENT = `
-				<td nowrap="nowrap" colspan="1" style="padding: 0px; width: ${SIZE/2}px" ></td>
+				<td nowrap="nowrap" colspan="3" style="padding: 0px; width: ${SIZE/2}px" ></td>
 `
 const EMPTY_BOX = `
-				<td nowrap="nowrap" colspan="2" style="padding: 0px; width: ${SIZE/2}px" ></td>
+				<td nowrap="nowrap" colspan="6" style="padding: 0px; width: ${SIZE/2}px" ></td>
 `
 
 const START_BOX = `
-				<td nowrap="nowrap" colspan="2" style="padding: 0px"><div style="width: 76px"><div class="featured-media">
+				<td nowrap="nowrap" colspan="6" style="padding: 0px"><div style="width: ${SIZE}px"><div class="featured-media">
 `
 const END_BOX = `
 				</div></div></td>
@@ -46,7 +46,7 @@ const END_BOX = `
 
 const EMPTY_ROW = `
 			<tr id="row0" style="border-style:hidden; background-color: white;">`+`
-				<td nowrap="nowrap" colspan="1" style="padding: 0px; width: 38px" ></td>`.repeat(88)+`
+				<td nowrap="nowrap" colspan="1" style="padding: 0px; width: ${SIZE/(2*3)}px" ></td>`.repeat(88*3)+`
 			</tr>
 `
 const FOOT = `
