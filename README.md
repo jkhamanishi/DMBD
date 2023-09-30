@@ -1,3 +1,1 @@
-# DMBD
-
-converts Excel data file to the HTML code suitable for WordPress
+# Digital Memory Box Database (DMBD)
