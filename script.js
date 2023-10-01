@@ -37,7 +37,7 @@ function createBox(box) {
     boxContainer.id = "box-" + box.box_number;
     const boxDetailsContainer = createAndAppendElement(boxContainer, "div", "box-details-container bg-primary");
     const boxImage = createAndAppendElement(boxDetailsContainer, "img", "box-image");
-    boxImage.src = "../data/images/box_previews/box (" + box.box_number + ").jpg";
+    boxImage.src = "data/images/box_previews/box (" + box.box_number + ").jpg";
     if (box.wall_orientation == "portrait") {
         boxContainer.style.width = BOX_WIDTH + "px";
         boxContainer.style.height = BOX_HEIGHT + "px";
