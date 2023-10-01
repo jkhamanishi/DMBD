@@ -6,9 +6,8 @@ $( document ).ready( function() {
 function loadWall() {
     fetch('data/DMBD_DATA.csv')
     .then(response => response.text())
-    .then(csv_data => csvToObject(csv_data))
+    .then(csv => csvToObject(csv))
     .then(box_data => {
-        console.log(box_data[0])
         for (box of box_data) {
             createBox(box);
         }
@@ -24,46 +23,69 @@ function csvToObject(csv, delimiter=',') {
             return obj;
         }, {} );
     });
-};
+}
 
 // Box pixel size in portrait orientation
-const BOX_WIDTH =60;
+const BOX_WIDTH = 69;  // nice
 const BOX_HEIGHT = BOX_WIDTH*(4/3);
 
 function createBox(box) {
-    box.details = "Box #"+box.box_number+": "+box.name+" ("+box.year+")";
-    const wall = document.getElementById("wall");
-    const boxContainer = createAndAppendElement(wall, "div", "box-container");
-    boxContainer.id = "box-" + box.box_number;
+    box.details = "Box #"+box.box_number+":\n"+box.name+"\n("+box.year+")";
+    const boxContainer = createContainer();
     const boxDetailsContainer = createAndAppendElement(boxContainer, "div", "box-details-container bg-primary");
-    const boxImage = createAndAppendElement(boxDetailsContainer, "img", "box-image");
-    boxImage.src = "data/images/box_previews/box (" + box.box_number + ").jpg";
-    if (box.wall_orientation == "portrait") {
-        boxContainer.style.width = BOX_WIDTH + "px";
-        boxContainer.style.height = BOX_HEIGHT + "px";
-        boxContainer.style.gridColumn = box.column + " / span 6";
-        boxImage.width = BOX_WIDTH;
-        boxImage.height = BOX_HEIGHT;
-    } else if (box.wall_orientation == "landscape") {
-        boxContainer.style.width = BOX_HEIGHT + "px";
-        boxContainer.style.height = BOX_WIDTH + "px";
-        boxContainer.style.gridColumn = box.column + " / span 8";
-        boxImage.width = BOX_HEIGHT;
-        boxImage.height = BOX_WIDTH;
-    } else {
-        throw new Error("Box " + box.box_number + " has an wall invalid orientation: " + box.wall_orientation);
+    const boxImage = createImage();
+    const boxDetails = createDetails();
+
+    function createContainer() {
+        const wall = document.getElementById("wall");
+        const container = createAndAppendElement(wall, "div", "box-container");
+        container.id = "box-" + box.box_number;
+        container.style.gridRow = - box.row;  // row 1 is at the bottom
+        switch (box.wall_orientation) {
+            case "portrait":
+                container.style.width = BOX_WIDTH + "px";
+                container.style.height = BOX_HEIGHT + "px";
+                container.style.gridColumn = box.column + " / span 6";
+                break;
+            case "landscape":
+                container.style.width = BOX_HEIGHT + "px";
+                container.style.height = BOX_WIDTH + "px";
+                container.style.gridColumn = box.column + " / span 8";
+                break;
+            default:
+                throw new Error("Box " + box.box_number + " has an invalid wall orientation: " + box.wall_orientation);
+        }
+        return container;
     }
-    boxContainer.style.gridRow = - box.row;  // row 1 is at the bottom
-
-    const boxDetails = document.createElement("p");
-    boxDetails.className = "box-details text-light mb-0";
-    boxDetails.innerText = box.details;
-    $(boxContainer).hover(function() {
-        boxDetailsContainer.appendChild(boxDetails);
-    }, function() {
-        boxDetailsContainer.removeChild(boxDetails);
-    });
-
+    function createImage() {
+        const img = createAndAppendElement(boxDetailsContainer, "img", "box-image");
+        img.src = "data/images/box_previews/box (" + box.box_number + ").jpg";
+        switch (box.wall_orientation) {
+            case "portrait":
+                img.width = BOX_WIDTH;
+                img.height = BOX_HEIGHT;
+                break;
+            case "landscape":
+                img.width = BOX_HEIGHT;
+                img.height = BOX_WIDTH;
+                break;
+            default:
+                throw new Error("Box " + box.box_number + " has an invalid wall orientation: " + box.wall_orientation);
+        }
+        return img;
+    }
+    function createDetails() {
+        const details = document.createElement("p");
+        details.className = "box-details text-light mb-0";
+        details.innerText = box.details;
+        $(boxImage).on("mouseenter", () => {
+            boxDetailsContainer.appendChild(details);
+            $(boxDetailsContainer).addClass("hover");
+        }).on("mouseleave", () => {
+            boxDetailsContainer.removeChild(details);
+            $(boxDetailsContainer).removeClass("hover");
+        });
+    }
 }
 
 function createAndAppendElement(parent, tagName, classes) {

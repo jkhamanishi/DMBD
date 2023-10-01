@@ -1,37 +1,23 @@
 #wall {
     display: grid;
-    padding: 25px 10px 100px;
+    padding: 25px 20px 100px;
     overflow: auto
 }
 .box-container {
     cursor: pointer;
 }
-.box-container:hover > .box-details-container {
-    font-size: 0.75em;
-    --details-margin: 10px;
+.box-details-container{
+    font-size: 0.7em;
+    width: fit-content;
+    transition: transform 0.4s;
+    transform:scale(1);
+}
+.box-details-container.hover {
+    z-index: 1;
     position: relative;
+    --details-margin: 10px;
     padding: var(--details-margin);
     top: calc(var(--details-margin) * -1);
     left: calc(var(--details-margin) * -1);
-    width: fit-content;
-    transition: transform 0.4s;
     transform:scale(1.2);
-}
-
-kbd {
-    background-color: #eee;
-    border-radius: 3px;
-    border: 1px solid #b4b4b4;
-    box-shadow:
-        0 1px 1px rgba(0, 0, 0, 0.2),
-        0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
-    display: inline-block;
-    position:relative;
-    top:-2px;
-    color: #333;
-    font-size: 0.85em;
-    font-weight: 700;
-    line-height: 1;
-    padding: 2px 4px;
-    white-space: nowrap;
 }
