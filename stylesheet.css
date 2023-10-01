@@ -1,14 +1,22 @@
 #wall {
     display: grid;
     padding: 10px;
+    padding-bottom: 100px;
     overflow: auto
 }
 .box-container {
     cursor: pointer;
 }
-.box-image {
-    width: 100%;
-    object-fit: contain;
+.box-container:hover > .box-details-container {
+    font-size: 0.8em;
+    --details-margin: 10px;
+    position: relative;
+    padding: var(--details-margin);
+    top: calc(var(--details-margin) * -1);
+    left: calc(var(--details-margin) * -1);
+    width: fit-content;
+    transition: transform 0.4s;
+    transform:scale(1.2);
 }
 
 kbd {
