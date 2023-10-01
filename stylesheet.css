@@ -1,14 +1,13 @@
 #wall {
     display: grid;
-    padding: 10px;
-    padding-bottom: 100px;
+    padding: 25px 10px 100px;
     overflow: auto
 }
 .box-container {
     cursor: pointer;
 }
 .box-container:hover > .box-details-container {
-    font-size: 0.8em;
+    font-size: 0.75em;
     --details-margin: 10px;
     position: relative;
     padding: var(--details-margin);

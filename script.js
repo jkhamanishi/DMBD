@@ -27,7 +27,7 @@ function csvToObject(csv, delimiter=',') {
 };
 
 // Box pixel size in portrait orientation
-const BOX_WIDTH = 72;
+const BOX_WIDTH =60;
 const BOX_HEIGHT = BOX_WIDTH*(4/3);
 
 function createBox(box) {
