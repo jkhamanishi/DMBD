@@ -13,15 +13,23 @@
 
   <!--  Custom stylesheet and script  -->
   <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
-  <script src="js/script.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/main.js"></script>
 </head>
 
 <body><div class="container-fluid mt-3">
   <h1>Digital Memory Box Database</h1>
-  <p>Hover over a box to see details. Click on a box to enlarge.</p>
+  <p>
+    <b>Mouse Controls: </b>
+    Hover over a box to see details. Click and drag to pan. Scroll to zoom. Click to reset position and zoom.
+    <br>
+    <b>Touch Controls: </b>
+    Drag to pan. Pinch to zoom. Tap to reset position and zoom.
+  </p>
 
-  <div id="wall" class="bg-secondary"></div>
-
+  <div id="wall-container" class="bg-secondary">
+    <div id="wall"></div>
+  </div>
 
 </div></body>
 </html>

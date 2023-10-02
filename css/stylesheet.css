@@ -1,10 +1,6 @@
 #wall {
     display: grid;
     padding: 25px 20px 100px;
-    overflow: auto
-}
-.box-container {
-    cursor: pointer;
 }
 .box-details-container{
     font-size: 0.7em;

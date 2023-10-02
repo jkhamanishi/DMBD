@@ -1,6 +1,7 @@
 $( document ).ready( function() {
     // On document load
     loadWall();
+    enablePanAndZoom();
 });
 
 function loadWall() {
