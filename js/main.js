@@ -76,7 +76,7 @@ function createBox(box) {
         return img;
     }
     function createDetails() {
-        const details = document.createElement("p");
+        const details = document.createElement("div");
         details.className = "box-details text-white mb-0";
         details.innerText = box.details;
         $(boxImage).on("mouseenter", () => {
