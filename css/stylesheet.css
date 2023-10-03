@@ -1,12 +1,21 @@
+#container {
+    display: grid;
+    height: 100vh;
+    grid: auto 1fr auto / 1fr;
+}
+#wall-container {
+    background-color: var(--bs-gray-200);
+}
 #wall {
     display: grid;
     padding: 25px 20px 100px;
+    transform: scale(0.8);
 }
 .box-details-container{
     font-size: 0.7em;
     width: fit-content;
     transition: transform 0.4s;
-    transform:scale(1);
+    transform: scale(1);
 }
 .box-details-container.hover {
     z-index: 1;

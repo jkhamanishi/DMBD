@@ -17,19 +17,63 @@
   <script src="js/main.js"></script>
 </head>
 
-<body><div class="container-fluid mt-3">
-  <h1>Digital Memory Box Database</h1>
-  <p>
-    <b>Mouse Controls: </b>
-    Hover over a box to see details. Click and drag to pan. Scroll to zoom. Click to reset position and zoom.
-    <br>
-    <b>Touch Controls: </b>
-    Drag to pan. Pinch to zoom. Tap to reset position and zoom.
-  </p>
+<body><div id="container" class="container-fluid py-3">
 
-  <div id="wall-container" class="bg-secondary">
+  <div id="header" class="mb-3">
+    <nav class="navbar navbar-expand-lg bg-primary mb-2" data-bs-theme="dark">
+      <div class="container-fluid">
+        <h1 class="text-white mb-1">Digital Memory Box Database</h1>
+      </div>
+    </nav>
+    <div>
+      <b>Mouse Controls: </b>
+      Hover over a box to see details. Click and drag to pan. Scroll to zoom. Click to reset position and zoom.
+      <br>
+      <b>Touch Controls: </b>
+      Drag to pan. Pinch to zoom. Tap to reset position and zoom.
+    </div>
+  </div>
+
+  <div id="wall-container" class="mb-3">
     <div id="wall"></div>
   </div>
 
+  <div id="year-filter-group" class="row col-auto mb-2">
+    <div class="col-auto my-auto">Year:</div>
+    <div class="col-auto btn-group d-none d-md-block my-auto px-0" id="filter-radio" role="group">
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-all" value=".box-container" checked><label class="btn btn-outline-primary px-2" for="filter-all">All</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2010" value=".year-2010"><label class="btn btn-outline-primary px-2" for="filter-2010">2010</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2011" value=".year-2011"><label class="btn btn-outline-primary px-2" for="filter-2011">2011</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2012" value=".year-2012"><label class="btn btn-outline-primary px-2" for="filter-2012">2012</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2013" value=".year-2013"><label class="btn btn-outline-primary px-2" for="filter-2013">2013</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2014" value=".year-2014"><label class="btn btn-outline-primary px-2" for="filter-2014">2014</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2015" value=".year-2015"><label class="btn btn-outline-primary px-2" for="filter-2015">2015</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2016" value=".year-2016"><label class="btn btn-outline-primary px-2" for="filter-2016">2016</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2017" value=".year-2017"><label class="btn btn-outline-primary px-2" for="filter-2017">2017</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2018" value=".year-2018"><label class="btn btn-outline-primary px-2" for="filter-2018">2018</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2019" value=".year-2019"><label class="btn btn-outline-primary px-2" for="filter-2019">2019</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2020" value=".year-2020"><label class="btn btn-outline-primary px-2" for="filter-2020">2020</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2021" value=".year-2021"><label class="btn btn-outline-primary px-2" for="filter-2021">2021</label>
+      <input type="radio" class="btn-check" name="filter-radio" id="filter-2022" value=".year-2022"><label class="btn btn-outline-primary px-2" for="filter-2022">2022</label>
+    </div>
+    <div class="col-auto form-group d-md-none" style="width: 200px">
+      <select class="form-select" id="filter-dropdown">
+        <option value=".box-container">All</option>
+        <option value=".year-2010">2010</option>
+        <option value=".year-2011">2011</option>
+        <option value=".year-2012">2012</option>
+        <option value=".year-2013">2013</option>
+        <option value=".year-2014">2014</option>
+        <option value=".year-2015">2015</option>
+        <option value=".year-2016">2016</option>
+        <option value=".year-2017">2017</option>
+        <option value=".year-2018">2018</option>
+        <option value=".year-2019">2019</option>
+        <option value=".year-2020">2020</option>
+        <option value=".year-2021">2021</option>
+        <option value=".year-2022">2022</option>
+      </select>
+    </div>
+  </div>
 </div></body>
 </html>

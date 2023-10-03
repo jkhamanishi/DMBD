@@ -31,7 +31,7 @@ const BOX_WIDTH = 69;  // nice
 const BOX_HEIGHT = BOX_WIDTH*(4/3);
 
 function createBox(box) {
-    box.details = "Box #"+box.box_number+":\n"+box.name+"\n("+box.year+")";
+    box.details = "Box #"+box.box_number+":\n"+box.name+(box.year ? "\n("+box.year+")" : "");
     const boxContainer = createContainer();
     const boxDetailsContainer = createAndAppendElement(boxContainer, "div", "box-details-container bg-primary");
     const boxImage = createImage();
@@ -39,7 +39,7 @@ function createBox(box) {
 
     function createContainer() {
         const wall = document.getElementById("wall");
-        const container = createAndAppendElement(wall, "div", "box-container");
+        const container = createAndAppendElement(wall, "div", "box-container year-"+box.year);
         container.id = "box-" + box.box_number;
         container.style.gridRow = - box.row;  // row 1 is at the bottom
         switch (box.wall_orientation) {
@@ -54,7 +54,7 @@ function createBox(box) {
                 container.style.gridColumn = box.column + " / span 8";
                 break;
             default:
-                throw new Error("Box " + box.box_number + " has an invalid wall orientation: " + box.wall_orientation);
+                throw new Error("Box "+box.box_number+" has an invalid wall orientation: "+box.wall_orientation);
         }
         return container;
     }
@@ -71,20 +71,20 @@ function createBox(box) {
                 img.height = BOX_WIDTH;
                 break;
             default:
-                throw new Error("Box " + box.box_number + " has an invalid wall orientation: " + box.wall_orientation);
+                throw new Error("Box "+box.box_number+" has an invalid wall orientation: "+box.wall_orientation);
         }
         return img;
     }
     function createDetails() {
         const details = document.createElement("p");
-        details.className = "box-details text-light mb-0";
+        details.className = "box-details text-white mb-0";
         details.innerText = box.details;
         $(boxImage).on("mouseenter", () => {
             boxDetailsContainer.appendChild(details);
-            $(boxDetailsContainer).addClass("hover");
+            boxDetailsContainer.classList.add("hover");
         }).on("mouseleave", () => {
             boxDetailsContainer.removeChild(details);
-            $(boxDetailsContainer).removeClass("hover");
+            boxDetailsContainer.classList.remove("hover");
         });
     }
 }
