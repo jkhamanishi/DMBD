@@ -128,7 +128,7 @@ function handleTouch(e) {
 
 //Hub for click events???? kinda???
 function handleClick(e){
-    resetTransform();  // Replace this with your desired click function.
+    e.target.dispatchEvent(new Event("openModal"));
 }
 
 // Drag functions

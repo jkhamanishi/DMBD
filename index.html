@@ -8,6 +8,9 @@
   <!--  JQuery  -->
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
+  <!--  Boostrap Script  -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
   <!--  Bootswatch Litera theme for Boostrap  -->
   <link href="https://bootswatch.com/5/litera/bootstrap.css" rel="stylesheet">
 
@@ -20,32 +23,36 @@
   <script src="js/main.js"></script>
 </head>
 
-<body><div id="container" class="container-fluid py-3">
+<body>
 
-  <div id="header" class="mb-3">
+<!-- Page Content -->
+<div id="container" class="container-fluid py-3">
+
+  <header id="header" class="mb-3">
     <nav class="navbar navbar-expand-lg bg-primary mb-2" data-bs-theme="dark">
       <div class="container-fluid">
         <h1 class="text-white mb-1">Digital Memory Box Database</h1>
       </div>
     </nav>
-    <div>
+    <div id="controls">
       <b>Mouse Controls: </b>
       Hover over a box to see details. Click and drag to pan. Scroll to zoom. Click to reset position and zoom.
       <br>
       <b>Touch Controls: </b>
       Drag to pan. Pinch to zoom. Tap to reset position and zoom.
     </div>
-  </div>
+  </header>
 
-  <div class="mb-3" style="position: relative; overflow: hidden">
+  <main id="main" class="mb-3 position-relative overflow-hidden">
     <div id="wall-container">
       <div id="wall"></div>
     </div>
-    <div id="search-button" class="bg-primary text-white" onclick="alert()"><i class="fa fa-search"></i></div>
-  </div>
+    <button type="button" id="search-button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#box-modal">
+      <i class="fa fa-search"></i>
+    </button>
+  </main>
 
-
-  <div id="year-filter-group" class="row col-auto mb-2">
+  <footer id="year-filter-group" class="row col-auto mb-2">
     <div class="col-auto my-auto">Year:</div>
     <div class="col-auto btn-group d-none d-md-block my-auto px-0" id="filter-radio" role="group">
       <input type="radio" class="btn-check" name="filter-radio" id="filter-all" value=".box-container" checked><label class="btn btn-outline-primary px-2" for="filter-all">All</label>
@@ -81,6 +88,40 @@
         <option value=".year-2022">2022</option>
       </select>
     </div>
-  </div>
-</div></body>
+  </footer>
+
+</div>
+
+<!-- Modal -->
+<div class="modal" id="box-modal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+
+    <header class="modal-header">
+      <h1 class="modal-title fs-5" id="modal-details"></h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </header>
+
+    <main class="modal-body overflow-hidden">
+      <img class="box-image" src="data/images/boxes/box (1).jpg">
+    </main>
+
+    <footer class="modal-footer">
+      <button type="button" class="btn btn-primary me-auto" id="left">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-primary" id="up">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-primary" id="down">
+        <i class="fa fa-arrow-down" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-primary ms-auto" id="right">
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+      </button>
+    </footer>
+
+  </div></div>
+</div>
+
+</body>
 </html>
