@@ -12,17 +12,17 @@ const MIN_ZOOM = 0.1;
 const SCROLL_FACTOR = 1.05;
 
 // Global variables
-let element;
-let parent;
-let currentZoom = 1;
-let lastZoom = currentZoom;
+let element, parent;
+let objLoc;  // object location
+let currentZoom, lastZoom;
 let isDragging = false;
-let objLoc = { x: 0, y: 0 };  // object location
 let dragStart = { x: 0, y: 0 };
 let initialPinchDistance = null;
 let mouseMoved = false;
 let hasZoomed = false;
 
+// Execute this function after your desired element has been loaded and
+// after the above variables have been declared
 function enablePanAndZoom() {
     element = document.getElementById(ELEMENT_ID);
     parent = ALSO_DRAG_OUTSIDE ? element.parentElement : element;
@@ -32,11 +32,10 @@ function enablePanAndZoom() {
 
 function initializeStyles() {
     element.style.transformOrigin = "0px 0px";
-    element.style.width = "fit-content";
     parent.style.overflow = "hidden";
+    parent.style.cursor = "grab";
+    resetTransform();
 }
-
-// Add event listeners
 function addNavigationListeners() {
     parent.addEventListener('mousedown', handleMouse)
     parent.addEventListener('mousemove', handleMouse)
@@ -48,15 +47,16 @@ function addNavigationListeners() {
 }
 
 // Transforms the movable object element
+function resetTransform(){
+    objLoc = { x: -800, y: 0 };  // Set this as the initial position
+    currentZoom = 0.8;           // Set this as the initial zoom
+    lastZoom = currentZoom;
+    setTransform();
+}
 function setTransform() {
     const translate = "translate(" + objLoc.x + "px, " + objLoc.y + "px) ";
     const scale = "scale(" + currentZoom + ")";
     element.style.transform = translate + scale;
-}
-function resetTransform(){
-    objLoc = { x: 0, y: 0 };
-    currentZoom = 1;
-    element.style.transform = "scale(1) translate(0px, 0px)";
 }
 
 // Gets the relevant location from a mouse or touch event
