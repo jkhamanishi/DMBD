@@ -48,8 +48,10 @@ function addNavigationListeners() {
 
 // Transforms the movable object element
 function resetTransform(){
-    objLoc = { x: -800, y: 0 };  // Set this as the initial position
-    currentZoom = 0.8;           // Set this as the initial zoom
+    currentZoom = 0.8;               // Set this as the initial zoom
+    const initialX = (window.innerWidth)/2 - 69*44*currentZoom/2;
+    const initialY = 0;
+    objLoc = { x: initialX, y: initialY };  // Set this as the initial position
     lastZoom = currentZoom;
     setTransform();
 }
