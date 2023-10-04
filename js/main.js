@@ -36,7 +36,7 @@ function createBox(box) {
     const boxDetailsContainer = createAndAppendElement(boxContainer, "div", "box-details-container bg-primary");
     const boxImage = createImage();
     const boxDetails = createDetails();
-    setModalTrigger()
+    $(boxImage).on("openModal", configureModal)
 
     function createContainer() {
         const wall = document.getElementById("wall");
@@ -88,24 +88,22 @@ function createBox(box) {
             boxDetailsContainer.classList.remove("hover");
         });
     }
-    function setModalTrigger() {
-        $(boxImage).on("openModal", () => {
-            $("#modal-details").text(box.details.replace(/\n/gm, " "));
-            const img = document.querySelector("#box-modal img");
-            img.src = "data/images/box_previews/box (" + box.box_number + ").jpg";
-            img.style.transform = (box.orientation != box.wall_orientation) ? "rotate(-90deg) scale(calc(3/4))" : "";
-            new Promise( resolve => {
-                img.onload = img.onerror = resolve;
-            }).then( () => {
-                $("#box-modal").modal('show');
-                setMaxHeight();
-                img.src = "data/images/boxes/box (" + box.box_number + ").jpg";
-            });
-            setLeftAndRightButtons();
+    function configureModal() {
+        $("#modal-details").text(box.details.replace(/\n/gm, " "));
+        const img = document.querySelector("#box-modal img");
+        img.src = "data/images/box_previews/box (" + box.box_number + ").jpg";
+        new Promise( resolve => {
+            img.onload = img.onerror = resolve;
+        }).then( () => {
+            img.className = (box.orientation != box.wall_orientation) ? "rotated" : "";
+            $("#box-modal").modal('show');
+            setMaxHeight();
+            img.src = "data/images/boxes/box (" + box.box_number + ").jpg";
         });
+        setLeftAndRightButtons();
+
         function setMaxHeight() {
             const content = $("#box-modal .modal-content");
-            content.css("--box-ratio", 4/3);
             content.css("--header-height", $("#box-modal header").outerHeight() + "px");
             content.css("--footer-height", $("#box-modal footer").outerHeight() + "px");
         }
