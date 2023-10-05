@@ -40,8 +40,10 @@
 }
 
 #box-modal .modal-content {
+    --modal-width: min( 100vw, var(--bs-modal-width) );
+    --modal-max-height: calc( var(--modal-width)*(4/3) + var(--header-height) + var(--footer-height) );
     height: 90vh;
-    max-height: calc( var(--bs-modal-width)*(4/3) + var(--header-height) + var(--footer-height) );
+    max-height: var(--modal-max-height);
 }
 #modal-image-container {
     width: 100%;
@@ -56,7 +58,7 @@
 }
 #modal-image-container img.rotated {
     width: 100%;
-    max-width: calc( ( 90vh - var(--header-height) - var(--footer-height) - 2*var(--bs-modal-padding) ) * (4/3) );
+    max-width: calc( ( min(90vh,var(--modal-max-height)) - var(--header-height) - var(--footer-height) - 2*var(--bs-modal-padding) ) * (4/3) );
     height: auto;
     max-height: initial;
     transform: rotate(-90deg) scale(calc(3/4));
