@@ -1,5 +1,5 @@
+// On document load
 $( document ).ready( function() {
-    // On document load
     loadWall();
     enablePanAndZoom();
 });
@@ -14,7 +14,6 @@ function loadWall() {
         }
     });
 }
-
 function csvToObject(csv, delimiter=',') {
     const titles = csv.slice(0, csv.search(/(\r\n|\n|\r)/gm)).split(delimiter);
     return csv.slice(csv.indexOf('\n') + 1).replace(/\r/gm, "").trimEnd().split('\n').map(line => {
@@ -61,6 +60,7 @@ function createBox(box) {
     }
     function createImage() {
         const img = createAndAppendElement(boxDetailsContainer, "img", "box-image");
+        img.style.backgroundColor = randomPastelColorGenerator();
         img.src = "data/images/box_previews/box (" + box.box_number + ").jpg";
         switch (box.wall_orientation) {
             case "portrait":
@@ -129,4 +129,12 @@ function createAndAppendElement(parent, tagName, classes) {
     newElement.className = classes;
     parent.appendChild(newElement);
     return newElement
+}
+
+function randomPastelColorGenerator(){
+  const rand = (min, max) => min + (max - min) * Math.random();
+  const h = rand(0, 360),
+        s = rand(30, 100),
+        l = rand(75, 90);
+  return `hsl(${h}, ${s}%, ${l}%)`
 }
