@@ -2,6 +2,7 @@
 $( document ).ready( function() {
     loadWall();
     enablePanAndZoom();
+    showControls();
 });
 
 function loadWall() {
@@ -121,6 +122,21 @@ function createBox(box) {
                 }
             });
         }
+    }
+}
+
+// Display descriptions for controls
+function showControls() {
+    window.addEventListener('mousemove', showMouseControls);
+    window.addEventListener('touchstart', showTouchControls);
+
+    function showMouseControls() {
+        document.getElementById("mouse-controls-description").style.display = "block";
+        document.getElementById("touch-controls-description").style.display = "none";
+    }
+    function showTouchControls() {
+        document.getElementById("mouse-controls-description").style.display = "none";
+        document.getElementById("touch-controls-description").style.display = "block";
     }
 }
 
