@@ -4,6 +4,7 @@ $( document ).ready( function() {
     enablePanAndZoom();
     enableBoxSearchCallbacks();
     showControls();
+    enableFilters();
 });
 
 function loadWall() {
@@ -34,7 +35,7 @@ const BOX_HEIGHT = BOX_WIDTH*(4/3);
 function createBox(box) {
     box.details = "Box #"+box.box_number+":\n"+box.name+(box.year ? "\n("+box.year+")" : "");
     const boxContainer = createContainer();
-    const boxDetailsContainer = createAndAppendElement(boxContainer, "div", "box-details-container bg-primary");
+    const boxDetailsContainer = createAndAppendElement(boxContainer, "div", "box-details-container");
     const boxImage = createImage();
     const boxDetails = createDetails();
     $(boxImage).on("openModal", configureModal)
@@ -186,6 +187,23 @@ function turnOffSearch() {
     searchBox.addClass("d-none");
     $("#modal-details").removeClass("d-none");
 }
+
+// Year filters
+function enableFilters() {
+    $("#filter-radio input").on('change', function() {
+        $('#filter-dropdown').val(this.value);
+        setFilter(this.value);
+    })
+    $('#filter-dropdown').on('change', function() {
+      $('#filter-radio input[value="' + this.value + '"]').prop('checked', true);
+      setFilter(this.value);
+    });
+    function setFilter(filter) {
+        $(".box-container img").removeClass("filtered");
+        $(".box-container:not("+filter+") img").addClass("filtered");
+    }
+}
+
 
 function createAndAppendElement(parent, tagName, classes="") {
     const newElement = document.createElement(tagName);
