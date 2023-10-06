@@ -1,6 +1,7 @@
 #container {
     display: grid;
     height: 100vh;
+    height: 100svh;
     grid: auto 1fr auto / 1fr;
 }
 #wall-container {
