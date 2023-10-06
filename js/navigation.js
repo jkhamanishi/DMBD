@@ -10,6 +10,7 @@ const ALSO_DRAG_OUTSIDE = true;
 const MAX_ZOOM = 5;
 const MIN_ZOOM = 0.1;
 const SCROLL_FACTOR = 1.05;
+const CLICK_THRESHOLD = 2;
 
 // Global variables
 let element, parent;
@@ -17,6 +18,7 @@ let objLoc;  // object location
 let currentZoom, lastZoom;
 let isDragging = false;
 let dragStart = { x: 0, y: 0 };
+let startLoc = { x: 0, y: 0 };
 let initialPinchDistance = null;
 let mouseMoved = false;
 let hasZoomed = false;
@@ -138,6 +140,10 @@ function onPointerDown(e) {
     parent.style.cursor = "grabbing";
     isDragging = true;
     const eLoc = getEventLocation(e);
+    startLoc = {
+        x: eLoc.x,
+        y: eLoc.y
+    }
     dragStart = {
         x: eLoc.x - objLoc.x,
         y: eLoc.y - objLoc.y
@@ -151,9 +157,9 @@ function onPointerUp(e) {
     lastZoom = currentZoom;
 }
 function onPointerMove(e) {
-    mouseMoved = true;
     parent.style.cursor = "grabbing";
     const eLoc = getEventLocation(e);
+    mouseMoved =  (Math.abs(startLoc.x - eLoc.x) > CLICK_THRESHOLD && Math.abs(startLoc.y - eLoc.y) > CLICK_THRESHOLD);
     objLoc.x = (eLoc.x - dragStart.x);
     objLoc.y = (eLoc.y - dragStart.y);
     setTransform();
