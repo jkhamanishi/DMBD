@@ -2,6 +2,7 @@
 $( document ).ready( function() {
     loadWall();
     enablePanAndZoom();
+    enableBoxSearchCallbacks();
     showControls();
 });
 
@@ -37,6 +38,7 @@ function createBox(box) {
     const boxImage = createImage();
     const boxDetails = createDetails();
     $(boxImage).on("openModal", configureModal)
+    addToSearchList();
 
     function createContainer() {
         const wall = document.getElementById("wall");
@@ -90,7 +92,9 @@ function createBox(box) {
         });
     }
     function configureModal() {
+        $("#box-modal .modal-content").attr("displayBox", box.box_number);
         $("#modal-details").text(box.details.replace(/\n/gm, " "));
+        turnOffSearch();
         const img = document.querySelector("#box-modal img");
         img.src = "data/images/box_previews/box (" + box.box_number + ").jpg";
         new Promise( resolve => {
@@ -123,24 +127,67 @@ function createBox(box) {
             });
         }
     }
+    function addToSearchList() {
+        const list = document.getElementById("box-list");
+        const option = createAndAppendElement(list, "option");
+        option.value = box.details.replace(/\n/gm, " ");
+    }
 }
 
 // Display descriptions for controls
 function showControls() {
-    window.addEventListener('mousemove', showMouseControls);
-    window.addEventListener('touchstart', showTouchControls);
-
-    function showMouseControls() {
+    window.addEventListener('mousemove', function showMouseControls() {
         document.getElementById("mouse-controls-description").style.display = "block";
         document.getElementById("touch-controls-description").style.display = "none";
-    }
-    function showTouchControls() {
+    });
+    window.addEventListener('touchstart', function showTouchControls() {
         document.getElementById("mouse-controls-description").style.display = "none";
         document.getElementById("touch-controls-description").style.display = "block";
-    }
+    });
 }
 
-function createAndAppendElement(parent, tagName, classes) {
+// Search for a box
+function openSearchBox() {
+    turnOffSearch();
+    turnOnSearch();
+    if(!$("#box-modal .modal-content").attr("displayBox")){
+        $("#box-1 img").trigger("openModal");
+    } else {
+        $("#box-modal").modal('show');
+    }
+}
+function enableBoxSearchCallbacks() {
+    $('#box-modal').on('shown.bs.modal', () => {
+        const searchBox = $("#box-search");
+        if (!searchBox.hasClass("d-none")) {
+            searchBox.focus();
+        }
+    });
+    $("#search-button").on("click", openSearchBox);
+    $("#modal-details").on("click", turnOnSearch);
+    $("#modal-search-button").on("click", turnOnSearch);
+    $("#box-search").change(() => {
+        const search = $("#box-search").val();
+        if (Array.from(document.querySelectorAll("#box-list > option")).map(o => o.value).includes(search)) {
+            const boxNumber = search.match(/(\d+)/g)[0];
+            $("#box-"+boxNumber+" img").trigger("openModal");
+        }
+    })
+}
+function turnOnSearch() {
+    const searchBox = $("#box-search");
+    searchBox.removeClass("d-none");
+    searchBox.focus();
+    $("#modal-details").addClass("d-none");
+}
+function turnOffSearch() {
+    const searchBox = $("#box-search");
+    searchBox.val("");
+    searchBox.addClass("d-none");
+    $("#modal-details").removeClass("d-none");
+}
+
+function createAndAppendElement(parent, tagName, classes="") {
     const newElement = document.createElement(tagName);
     newElement.className = classes;
     parent.appendChild(newElement);

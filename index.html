@@ -46,7 +46,7 @@
     <div id="wall-container">
       <div id="wall"></div>
     </div>
-    <button type="button" id="search-button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#box-modal">
+    <button type="button" id="search-button" class="btn btn-primary">
       <i class="fa fa-search"></i>
     </button>
   </main>
@@ -96,8 +96,17 @@
   <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
 
     <header class="modal-header">
-      <h1 class="modal-title fs-5" id="modal-details"></h1>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="input-group">
+        <h1 class="modal-title fs-5 fw-bold form-control" id="modal-details"></h1>
+        <input class="modal-title fs-5 fw-bold form-control d-none" list="box-list" id="box-search" placeholder="Search for a Box">
+        <datalist id="box-list"></datalist>
+        <button class="btn btn-primary" type="button" id="modal-search-button">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+      <button type="button" class="btn btn-danger h-100 ms-2" data-bs-dismiss="modal" aria-label="Close" >
+        <i class="fa fa-times"></i>
+      </button>
     </header>
 
     <main class="modal-body overflow-hidden">
