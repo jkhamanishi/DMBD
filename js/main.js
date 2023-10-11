@@ -149,13 +149,12 @@ function showControls() {
 
 // Search for a box
 function openSearchBox() {
-    turnOffSearch();
-    turnOnSearch();
     if(!$("#box-modal .modal-content").attr("displayBox")){
         $("#box-1 img").trigger("openModal");
     } else {
         $("#box-modal").modal('show');
     }
+    turnOnSearch();
 }
 function enableBoxSearchCallbacks() {
     $('#box-modal').on('shown.bs.modal', () => {
